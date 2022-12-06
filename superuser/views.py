@@ -10,7 +10,6 @@ from login.models import CustomUser,Coupen
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator,EmptyPage
 import datetime
-from .filters import orderFilter
 from django.http import HttpResponse,FileResponse
 import csv
 import xlwt
