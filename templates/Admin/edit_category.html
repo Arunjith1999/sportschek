@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>   
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'admin/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'admin/css/vertical-layout-light/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'admin/images/favicon.png' %}" />
+
+    <style>
+
+.get-in-touch {
+  max-width: 800px;
+  margin: 50px auto;
+  position: relative;
+
+}
+.get-in-touch .title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 3.2em;
+  line-height: 48px;
+  padding-bottom: 48px;
+     color: #5543ca;
+    background: #5543ca;
+    background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+    background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+    background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.contact-form .form-field {
+  position: relative;
+  margin: 32px 0;
+}
+.contact-form .input-text {
+  display: block;
+  width: 100%;
+  height: 36px;
+  border-width: 0 0 2px 0;
+  border-color: #5543ca;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  
+}
+.contact-form .input-text:focus {
+  outline: none;
+}
+.contact-form .input-text:focus + .label,
+.contact-form .input-text.not-empty + .label {
+  -webkit-transform: translateY(-24px);
+          transform: translateY(-24px);
+}
+.contact-form .label {
+  position: absolute;
+  left: 20px;
+  bottom: 11px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #5543ca;
+  cursor: text;
+  margin-bottom: 20px;
+  /* transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, 
+  -webkit-transform .2s ease-in-out; */
+}
+.contact-form .submit-btn {
+  display: inline-block;
+  background-color: #000;
+   background-image: linear-gradient(125deg,#a72879,#064497);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  width:200px;
+  cursor: pointer;
+}
+
+
+    </style>
+</head>  
+<body>  
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo mr-5" href=""><img src="/img/main_logo.png" class="mr-2"
+                        style="height: 40px;" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href=""><img src="/img/mini-logo.png"
+                        style="width: auto;height: 45px;" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button"
+                    data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                            data-toggle="dropdown">
+                            <i class="icon-bell mx-0 header-icon-big"></i>
+                            <span class="count"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                            aria-labelledby="notificationDropdown">
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-success">
+                                        <i class="ti-info-alt mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                                    <p class="font-weight-light small-text mb-0 text-muted">
+                                        Just now
+                                    </p>
+                                </div>
+                            </a>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-warning">
+                                        <i class="ti-settings mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-normal">Settings</h6>
+                                    <p class="font-weight-light small-text mb-0 text-muted">
+                                        Private message
+                                    </p>
+                                </div>
+                            </a>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-info">
+                                        <i class="ti-user mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                                    <p class="font-weight-light small-text mb-0 text-muted">
+                                        2 days ago
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <div class="d-flex admin-profile">
+                        <a href="" style="text-decoration: none;"><img class="admin-profile-img"
+                                src="" alt="user"></a>
+                    </div>
+                    <div class="d-flex logout-box">
+                        <a href="/Admin/logout" style="text-decoration: none;"><i
+                                class="ti-power-off text-primary header-icon-big"></i></a>
+                    </div>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+
+
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin_home/">
+                      <i class="icon-grid menu-icon"></i>
+                      <span class="menu-title">Dashboard</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#orders" aria-expanded="false" aria-controls="orders">
+                      <i class="icon-layout menu-icon"></i>
+                      <span class="menu-title">Orders</span>
+                      <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="orders">
+                      <ul class="nav flex-column sub-menu">
+                          <li class="nav-item"> <a class="nav-link" href="/orders">Pending
+                                  Orders🔴</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="/order_progress">Order
+                                  Progress🟡</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="/completed_orders">Completed
+                                  Orders🟢</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+                      <i class="icon-columns menu-icon"></i>
+                      <span class="menu-title">Products</span>
+                      <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="form-elements">
+                      <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="/add_product">Add Product</a></li>
+                      </ul>
+                    </div>
+                    <div class="collapse" id="form-elements">
+                      <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="/Admin_products">View Products</a></li>
+                      </ul>
+                    </div>
+                  </li>
+        
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin_category">
+                        <i class=" icon-columns menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/offers">
+                    <i class="fa fa-money menu-icon"></i>
+                    <span class="menu-title">Offers</span>
+                  </a>
+                </li>
+                  
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/coupons">
+                  <i class="fa fa-money menu-icon"></i>
+                  <span class="menu-title">Coupons</span>
+                </a>
+              </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link"  href="/customers">
+                      <i class="icon-grid-2 menu-icon"></i>
+                      <span class="menu-title">Customers</span>
+                     
+                    </a>
+                  
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/all_report">
+                        <i class=" icon-columns menu-icon"></i>
+                        <span class="menu-title">Sales</span>
+                    </a>
+                </li>
+                   
+                    
+                  
+                 
+                </ul>
+              </nav>
+            <!-- partial --> 
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                            <h3 class="font-weight-bold">Edit Category
+                            </h3>
+                            <h6 class="font-weight-normal mb-4">Update category with necessary details</h6>
+                        </div>
+                    </div>
+
+    
+     
+
+        
+     <section class="get-in-touch">
+        {% comment %} <h1 class="title">Update Details</h1> {% endcomment %}
+        <form class="contact-form row" method="POST" >
+            {% csrf_token %} 
+            {% if messages %}
+            <ul class="messages">
+           {% for message in messages %}
+           <p>{{message}}</p>
+           {% endfor %}
+            </ul>
+        {% endif %} 
+            <div class="form-field col-lg-6">
+               <input  name="name" id="id_name" required maxlength="100" value="{{ data.name }}" class="input-text js-input" >
+               <label class="label" for="name">name</label>
+            </div>
+            <div class="form-field col-lg-6">
+                <input name="description" id="id_name" required maxlength="250" value="{{ data.description }}" class="input-text js-input" >
+                <label class="label" for="description">Description</label>
+             </div>
+             <div class="form-field col-lg-6">
+                <input name="offer" id="id_name" required maxlength="250" value="{{ data.offer }}" class="input-text js-input" >
+                <label class="label" for="offer">offer</label>
+             </div>
+            {% comment %} <div class="form-field col-lg-6 ">
+               <input id="email" class="input-text js-input" name="username"  required maxlength="254" value="{{ data.username }}" >
+               <label class="label" for="email">Username</label>
+            </div>
+            <div class="form-field col-lg-6 ">
+                <input type="email" name="email" id="id_email" required maxlength="254" value="{{ data.email }}" class="input-text js-input"/>  
+               <label class="label" for="company">email</label>
+            </div> {% endcomment %}
+             
+            <div class="form-field col-lg-12">
+               <input class="submit-btn" type="submit" value="Submit">
+            </div>
+         </form>
+     </section>
+     <footer>
+        <script src="{% static 'admin/vendors/js/vendor.bundle.base.js' %}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="{% static 'admin/vendors/chart.js/Chart.min.js' %}"></script>
+        <script src="{% static 'admin/vendors/datatables.net/jquery.dataTables.js' %}"></script>
+        <script src="{% static 'admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js' %}"></script>
+        <script src="{% static 'admin/js/dataTables.select.min.js' %}"></script>
+        <script src="{% static 'admin/vendors/dropify/dropify.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/vendors/jquery-file-upload/uploadfile.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/vendors/jquery-file-upload/uploadfile.css' %}">
+      
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="{% static 'admin/js/off-canvas.js' %}"></script>
+        <script src="{% static 'admin/js/hoverable-collapse.js' %}"></script>
+        <script src="{% static 'admin/js/template.js' %}"></script>
+        <script src="{% static 'admin/js/settings.js' %}"></script>
+        <script src="{% static 'admin/js/todolist.js' %}"></script>
+        <script src="{% static 'admin/js/dropify.js ' %}"></script>
+        <script src="{% static 'admin/js/jquery-file-upload.js' %}"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page-->
+        <script src="{% static 'admin/js/dashboard.js' %}"></script>
+        <script src="{% static 'admin/js/Chart.roundedBarCharts.js' %}"></script>
+     </footer>

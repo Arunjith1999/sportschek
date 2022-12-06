@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table" style="border-color:black">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Quantity</th>
+    
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for p in p %}
+            <tr>
+                <td>{{p.product.name}}</td>
+                <td class="product-image"><img src="{{p.product.image.url}}" alt=""style="width:60px"></td>
+                <td>{{p.product.description}}</td>   
+                <td>{{p.quantity}}</td>
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+       
+  
+    </table>
+</body>
+</html>

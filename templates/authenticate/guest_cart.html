@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="{% static 'customer/js/addcart.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/75083f68b7.js" crossorigin="anonymous"></script>
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js "></script>
+         <link rel="stylesheet" href="{% static 'cart/css/animate.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/all.main.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/cartmain.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/magnific-popup.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/meanmenu.min.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/owl.carousel.css' %}">
+         <link rel="stylesheet" href="{% static 'cart/css/responsive.css' %}">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% comment %} [8:33 PM, 11/20/2022] Martin Ekm: <script>
+            function getCookie(name) {
+                // Split cookie string and get all individual name = value pairs in an array 
+                var cookieArr = document.cookie.split(";");
+    
+                // loop through the array elements 
+                for (var i = 0; i< cookieArr.length;i++){
+                    var cookiePair = cookieArr[i].split("=");
+                    /* removing whitespaces at the beginning of the cookie name 
+                    and comapre it with the given string */
+                    if (name == cookiePair[0].trim()){
+                        // Decode the cookie value and return 
+                        return decodeURIComponent(cookiePair[1]);
+    
+                    }
+                }
+                // return null if not found 
+                return null;
+    
+                …
+    [8:51 PM, 11/20/2022] Martin Ekm:  {% endcomment %}
+    <div class="cart-section mt-150 mb-150">
+        <div class="container">
+            <h2 class="text-center">Cart</h2>
+            
+            {% if cart_data %}
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cart-table-wrap product_data">
+                    
+                        <table class="cart-table">
+                            <thead class="cart-table-head">
+                                <tr class="table-head-row">
+                                    
+                                    <!-- <th class="product-image">Product Image</th> -->
+                        
+                                    <th class="product-name">Name</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <!-- <th class="product-quantity">Total price</th> -->
+                                    
+                                    <th>Remove Item</th>
+                                </tr>
+                            </thead>
+    
+                            <tbody>
+                                {% for key, value in data.items %}
+                                <tr class="table-body-row">
+                                    
+                                    <!-- <td class="product-image"><img src="{{value.image}}" alt=""></td> -->
+                    
+                                    <td class="product-name">{{value.name}}</td>
+                                    
+                                    <td class="product-price"><span id="{{item.product.id}}">{{value.price}}</span> Rs</td>
+                                    <td class="product-quantity text-center">
+                                        <button class="btn btn-light decrement-button-{{item.id}} " style="width: 2.5em; border-radius: 1em;" onclick="decrement_quantity('{{item.quantity}}', '{{item.id}}')">-</button>
+                                                    <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{item.quantity}}" id="{{item.id}}">
+                                  <button class="btn btn-light increment-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  data-productQuantity="{{item.product.total_quantity}}" onclick="increment_quantity('{{item.quantity}}', '{{item.id}}')">+</button>
+                                        
+                                        {% comment %} <button class="btn btn-light decrement-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  onclick="minus_quantity('{{value.qty}}', '{{key}}')">-</button>
+                                                        <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{value.qty}}" id="{{item.id}}">
+    
+                                        <button class="btn btn-light increment-button-{{item.id}} " style="width: 2.5em; border-radius: 1em;" data-productQuantity="{{item.product.total_quantity}}" onclick="plus_quantity('{{value.qty}}', '{{key}}')">+</button> {% endcomment %}
+                                      
+                                        <!-- <input type="number" onclick="update_quantity('{{item.quantity}}')" value="{{item.quantity}}" class="form-control text-center" id="productQty"> -->
+                                    </td>
+                                    
+                                    <!-- <td id="total-{{item.id}}"></td> -->
+    
+                                    <input id="total-{{item.id}}" type="hidden" name="" id="">
+    
+                                    <td><input type="hidden" value="{{key}}" id="remove_id">
+                                        <button  onclick="showSwal('delete-product')" class="btn btn-danger">Remove</button></td>
+                                    
+                                </tr>
+                                
+    
+    
+                                <script type="text/javascript">
+    
+                                                console.log(document.getElementById('{{item.id}}').value);
+                                                                                                         
+                                                
+    
+                                                document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value))*parseInt('{{item.product.final_price}}')
+                        
+    
+        
+        
+                                                function increment_quantity(quantity, id){
+                                                    let id = parseInt(id)
+                                        
+                                                                $.ajax({
+                                                                type:'GET',
+                                                                url:'/plus_cart_quantity/'+quantity+'/'+id,
+                                                                
+                                                            })
+    
+                                                            
+                                                            }
+                                                                                    
+                                                
+    
+                                                function decrement_quantity(quantity, id){
+                                                    let id = parseInt(id)
+                                                                $.ajax({
+                                                                type:'GET',
+                                                                url:'/minus_cart_quantity/'+quantity+'/'+id,
+                                                                
+                                                            })
+                                                            } 
+                                                function productQuantity(total_quantity) {
+                                                    var stock_quantity = total_quantity
+                                                    // console.log(stock_quantity)
+                                                }
+    
+                                                $(document).ready(function () {
+                                                    $('.increment-button-{{item.id}}').click(function (e) { 
+                                                        document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value)+1)*parseInt('{{item.product.final_price}}')
+                                                        e.preventDefault();
+                                                        let quantity = $(this)
+                                                        // console.log(quantity[0].dataset.productquantity);
+                                                        let stock_quantity=quantity[0].dataset.productquantity
+                                                        var inc_value = $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val();
+                                                        var value = parseInt(inc_value,10);
+                                                        value = isNaN(value) ? 0: value;
+                                                        if(value < stock_quantity)
+                                                        {
+                                                            value++;
+                                                            $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val(value);
+                                                            var totalprice = document.getElementById('cart_total').innerHTML 
+                                                        console.log(totalprice)
+                                                        document.getElementById('cart_total').innerHTML  = parseInt(totalprice) + parseInt(document.getElementById('{{item.product.id}}').innerHTML)
+                                                        }
+    
+                                                        
+                                                   
+                                                        
+                                                    });
+    
+                                                    $('.decrement-button-{{item.id}}').click(function (e) { 
+                                                        document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value)-1)*parseInt('{{item.product.final_price}}')
+                                                        e.preventDefault();
+                                                        
+                                                        var dec_value = $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val();
+                                                        var value = parseInt(dec_value,10);
+                                                        value = isNaN(value) ? 0: value;
+                                                        if(value>1)
+                                                        {
+                                                            value--;
+                                                            $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val(value);
+                                                            var totalprice = document.getElementById('cart_total').innerHTML 
+                                                        console.log(totalprice)
+                                                        document.getElementById('cart_total').innerHTML  = parseInt(totalprice) - parseInt(document.getElementById('{{item.product.id}}').innerHTML)
+                                                        }
+    
+                                                        
+                                                    });
+                                                    
+                                                });            
+                                                
+                                              
+                                </script>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    
+                    
+    
+                    </div>
+                </div>
+    
+    
+                <div class="col-lg-4">
+                    <div class="total-section">
+                       
+                        <div class="total-section">
+    
+                            
+                        
+                            <td><strong> Subtotal : <span style="color: green; font-size: 1.5em;" id="cart_total">{{total_amt}}</span> Rs</strong></td>
+                            
+                            {% if address %}
+                            <div class="text-center" >
+                                <h6>Deliver to :</h6>
+                                <h5>{{address.name}}, {{address.house_name}}, {{address.street_name}}, {{address.landmark}}, {{address.city}}, {{address.pin_code}}</h5>
+                                <a href="/choose_address_select" ><button  class="btn-success" >change address</button></a>
+                            </div>
+                            {% else %}
+                                <h6>Choose an address</h6>
+                                <a href="/choose_address_select" ><button  class="btn-success" >Choose address</button></a>
+                            {% endif %}
+                            
+                            <div class="cart-buttons">
+    
+                                
+                                <a href="/login" ><button  class="btn btn-success" >Proceed to payment</button></a>
+                                <input type="hidden">
+                                <button  id="delete-cart" onclick="showSwal('delete-cart-session')" class="btn btn-danger" >Delete Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                   
+               
+                
+            </div>
+            {% else %} 
+                        
+                        <div class="row text-center" >
+    
+                    
+                        <div class="container">
+                            <h1 class="text-center">Cart is empty....</h1><br>
+                            <a class="text-center" href="/"><button class="btn btn-success">Shop Here</button></a>
+                        </div>
+                        
+    
+                       </div> 
+                        
+            {% endif %}
+        </div>
+    </div>
+        <script src="" async defer></script>
+    </body>
+    <script src="{% static 'customer/js/addcart.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cmain.js' %}"></script>
+<script src="{% static 'cart/js/jquery.countdown.js' %}"></script>
+<script src="{% static 'cart/js/jquery.isotope-3.0.6.min.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+     {% for message in messages%}
+     swal('{{message}}');
+     {% endfor %}
+ </script>
+</html>

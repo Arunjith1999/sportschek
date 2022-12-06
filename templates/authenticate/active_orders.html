@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'customer/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'customer/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/all.main.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/cartmain.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/meanmenu.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/responsive.css' %}">
+</head>
+<body>
+    <script type="text/javascript" src="{% static 'user/js/cart.js' %}" ></script>
+
+
+
+    <div class="breadcrumb-section breadcrumb-bg  " style="padding-top:30px">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2 text-center">
+            <div class="breadcrumb-text">
+              
+              <h2 style="color: aqua;">Active orders</h2>
+            </div>
+          </div>
+          <a href="/order_user"><button class="btn btn-success" >Order History</button></a>
+          
+        </div>
+      </div>
+      
+    </div>
+    <!-- end breadcrumb section -->
+    
+  <table class="table">
+      <thead>
+        <tr>
+         
+          <th scope="col"> Amount </th>
+          <th scope="col"> Payment status </th>
+          <th scope="col"> Payment method </th>
+          <th scope="col">Orederd at</th>
+          <th scope="col">Cancel order</th>
+          <th scope="col">Products</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for item in order %}
+      
+        <tr>
+         
+          
+         
+          <td>{{item.amount}}</td>
+          <td>{{item.is_paid}}</td>
+          <td>{{item.payment_method}}</td>
+          <td>{{item.created_at}}</td>
+          <td><a href="/order_cancel_user/{{item.id}}"><button  class="btn btn-danger" >Cancel</button></a></td>
+          <td><a href="/active_order_products/{{item.id}}"><button class="btn btn-success" >Products</button></a></td>
+        </tr>
+      {% endfor %} 
+      </tbody>
+    </table>
+</body>
+<div class="text-center">
+  {% if order.has_previous %}
+  <a href="{% url 'order_user' %}?page={{order.previous_page_number}}"><button class="btn-success">prev</button></a>
+  {% endif %}
+  {{order}}
+  {% if order.has_next %}
+  <a href ="{% url 'order_user' %}?page={{order.next_page_number}}"><button class="btn-success">Next</button></a>
+  {% endif %}
+</div>   
+</html>

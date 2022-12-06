@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'admin/vendors/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/vendors/ti-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/vendors/css/vendor.bundle.base.css' %} ">
+    <link rel="stylesheet" href="{% static 'admin/css/vertical-layout-light/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'admin/images/favicon.png' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+           <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon--warning">
+    <span class="swal-icon--warning__body">
+      <span class="swal-icon--warning__dot"></span>
+    </span>
+  </div><div class="swal-title" style="">Are you sure?</div><div class="swal-text" style="">You won't be able to revert this!</div><div class="swal-footer"><div class="swal-button-container">
+
+    <button class="swal-button swal-button--cancel btn btn-danger">Cancel</button>
+
+    <div class="swal-button__loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+  </div><div class="swal-button-container">
+
+    <button class="swal-button swal-button--confirm btn btn-primary">OK</button>
+
+    <div class="swal-button__loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+  </div></div></div>
+          </div>
+    </form>
+   
+      <script src="{% static 'admin/vendors/js/vendor.bundle.base.js' %}"></script>
+      <script src="{% static 'admin/vendors/sweetalert/sweetalert.min.js' %}"></script>
+      <script src="{% static 'admin/vendors/jquery.avgrund/jquery.avgrund.min.js' %}"></script>
+      <script src="{% static 'admin/js/off-canvas.js' %}"></script>
+      <script src="{% static 'admin/js/hoverable-collapse.js' %}"></script>
+      <script src="{% static 'admin/js/template.js' %}"></script>
+      <script src="{% static 'admin/js/settings.js' %}"></script>
+      <script src="{% static 'admin/js/todolist.js' %}"></script>
+      <script src="{% static 'admin/js/alerts.js' %}"></script>
+      <script src="{% static 'admin/js/avgrund.js' %}"></script>
+      
+</body>
+</html>
+
+
+
+
+
+
+

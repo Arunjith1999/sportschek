@@ -1,0 +1,314 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="{% static 'customer/js/addcart.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/75083f68b7.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js "></script>
+   <link rel="stylesheet" href="{% static 'cart/css/animate.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/all.main.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/cartmain.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/magnific-popup.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/meanmenu.min.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/owl.carousel.css' %}">
+   <link rel="stylesheet" href="{% static 'cart/css/responsive.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <div class="cart-section mt-150 mb-150">
+    <div class="container">
+        <h2 class="text-center">Cart</h2>
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="cart-table-wrap product_data">
+                    <table class="cart-table">
+                        <thead class="cart-table-head">
+                            <tr class="table-head-row">
+                                
+                                <th class="product-image">Product Image</th>
+                                <th class="product-name">Name</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <!-- <th class="product-quantity">Total price</th> -->
+                                
+                                <th>Remove Item</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <form action="" method="POST">
+                                {% csrf_token %} 
+                                <div class="form-group" style="    width: 13rem;
+                                padding-bottom: 17px;">
+                                    <label > </label>
+                                    <div class="input-group">
+                                        <input type="text" name="code" class="form-control" placeholder="Have Coupon?">
+                                        <span class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Apply</button>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                            </form> -->
+                            {% for item in cart %}
+                            <tr class="table-body-row">
+                                
+                                <td class="product-image"><img src="{{item.product.image.url}}" alt=""></td>
+                                <td class="product-name">{{item.product.name}}</td>
+                                <td class="product-price" id="{{item.product.id}}">{{item.product.final_price}} Rs</td>
+                                <td class="product-quantity text-center">
+                                
+                                  <button class="btn btn-light decrement-button-{{item.id}} " style="width: 2.5em; border-radius: 1em;" onclick="decrement_quantity('{{item.quantity}}', '{{item.id}}')">-</button>
+                                                    <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{item.quantity}}" id="{{item.id}}">
+                                  <button class="btn btn-light increment-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  data-productQuantity="{{item.product.total_quantity}}" onclick="increment_quantity('{{item.quantity}}', '{{item.id}}')">+</button>
+                                    <!-- <input type="number" onclick="update_quantity('{{item.quantity}}')" value="{{item.quantity}}" class="form-control text-center" id="productQty"> -->
+                                </td>
+                                
+                               <input type="hidden"id="total-{{item.id}}">
+
+                                <td><a href="/delete_product_cart/{{item.id}}"><button class="btn btn-danger">Remove</button></a></td>
+                                
+                            </tr>
+                            
+
+
+                            <script type="text/javascript">
+
+                                            console.log(document.getElementById('{{item.id}}').value);
+                                                                                                     
+                                            
+
+                                            document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value))*parseInt('{{item.product.final_price}}')
+                    
+
+    
+    
+                                            function increment_quantity(quantity, id){
+                                                console.log('kjhjgjhgjhgfjhgf')
+                                                console.log(quantity, id)
+                                    
+                                                            $.ajax({
+                                                            type:'GET',
+                                                            url:'/increment_cart_quantity/'+quantity+'/'+id,
+                                                            
+                                                        })
+
+                                                        
+                                                        }
+                                
+                                            
+
+                                            function decrement_quantity(quantity, id){
+            
+                                                            $.ajax({
+                                                            type:'GET',
+                                                            url:'/decrement_cart_quantity/'+quantity+'/'+id,
+                                                            
+                                                        })
+                                                        } 
+                                            function productQuantity(total_quantity) {
+                                                var stock_quantity = total_quantity
+                                                // console.log(stock_quantity)
+                                            }
+
+                                            $(document).ready(function () {
+                                                $('.increment-button-{{item.id}}').click(function (e) { 
+                                                    document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value)+1)*parseInt('{{item.product.final_price}}')
+                                                    e.preventDefault();
+                                                    let quantity = $(this)
+                                                    // console.log(quantity[0].dataset.productquantity);
+                                                    let stock_quantity=quantity[0].dataset.productquantity
+                                                    var inc_value = $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val();
+                                                    var value = parseInt(inc_value,10);
+                                                    value = isNaN(value) ? 0: value;
+                                                    if(value < stock_quantity)
+                                                    {
+                                                        value++;
+                                                        $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val(value);
+                                                        var totalprice=document.getElementById('cart_total').innerHTML
+                                                        console.log(totalprice)
+                                                    document.getElementById('cart_total').innerHTML = parseInt(totalprice)+parseInt(document.getElementById('{{item.product.id}}').innerHTML) 
+                                                    console.log('hi')
+                                                    console.log(parseInt(document.getElementById('{{item.product.id').innerHTML))
+                                                    console.log('hello')
+                                                    }
+                                                    
+                                                });
+
+                                                $('.decrement-button-{{item.id}}').click(function (e) { 
+                                                    document.getElementById("total-{{item.id}}").value = (parseInt(document.getElementById('{{item.id}}').value)-1)*parseInt('{{item.product.final_price}}')
+                                                    e.preventDefault();
+                                                    
+                                                    var dec_value = $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val();
+                                                    var value = parseInt(dec_value,10);
+                                                    value = isNaN(value) ? 0: value;
+                                                    if(value>1)
+                                                    {
+                                                        value--;
+                                                        $(this).closest('.product_data').find('.quantity-input-{{item.id}}').val(value);
+                                                        var totalprice=document.getElementById('cart_total').innerHTML
+                                                        console.log(totalprice)
+                                                    document.getElementById('cart_total').innerHTML = parseInt(totalprice)-parseInt(document.getElementById('{{item.product.id}}').innerHTML)  
+                                                    console.log((document.getElementById('{{item.product.id').innerHTML) ) 
+                                                    }
+                                                });
+                                                
+                                            });            
+                                            
+                                          
+                            </script>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+            </div>
+
+
+            <div class="col-lg-4">
+                <div class="total-section">
+                    <!-- <table class="total-table">
+                        <thead class="total-table-head">
+                            <tr class="table-total-row">
+                                <th>Total</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="total-data">
+                                <td><strong>Total quantity: </strong></td>
+                                <td>$500</td>
+                            </tr>
+                           
+                            <tr class="total-data">
+                                <td><strong>subtotal: </strong></td>
+                                <td id="total_price" >{{total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="cart-buttons">
+                         <a href="cart.html" class="boxed-btn">Update Cart</a> -->
+                        <!-- <a href="/checkout" class="boxed-btn black">Procedd to payment</a> -->
+                    <!-- </div> --> 
+                    <div class="total-section">
+                    
+                        <td><strong>subtotal: <span id="cart_total" >{{total}}</span> </strong></td>
+                        {% if address %}
+                        <div class="text-center" >
+                            <h6>Deliver to :</h6>
+                            <h5>{{address.name}}, {{address.house_name}}, {{address.street_name}}, {{address.landmark}}, {{address.city}}, {{address.pin_code}}</h5>
+                            <a href="/choose_address_select" ><button  class="btn-success" >change address</button></a>
+                        </div>
+                        {% else %}
+                            <h6>Choose an address</h6>
+                            <a href="/choose_address_select" ><button  class="btn-success" >Choose address</button></a>
+                        {% endif %}
+    
+    
+                        <div class="cart-buttons">
+                            <a href="/choose_payment_method/{{address.id}}" ><button class="btn btn-success" >Proceed to payment</button></a>
+                            <input type="hidden">
+                            <button id="delete-cart" onclick="showswal('delete-cart')" class="btn btn-danger" >Delete Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="coupon-section">
+                    <h3>Apply Coupon</h3>
+                    <div class="coupon-form-wrap">
+                        <form action="index.html">
+                            <p><input type="text" placeholder="Coupon"></p>
+                            <p><input type="submit" value="Apply"></p>
+                        </form>
+                    </div>
+                </div> -->
+            </div>
+            
+            
+            <div></div>
+            <!-- <div class="col-lg-4">
+                <div class="total-section">
+                    
+                    <td>Total Amount : {{total}} Rs<strong> </strong></td>
+
+
+                    <div class="cart-buttons">
+                        <a href="/delete_cart"><button class="btn btn-danger" >Delete Cart</button></a>
+                        <a href="/checkout" ><button class="btn btn-success" >Check Out</button></a>
+                    </div>
+                </div>
+
+                <!-- <div class="coupon-section">
+                    <h3>Apply Coupon</h3>
+                    <div class="coupon-form-wrap">
+                        <form action="index.html">
+                            <p><input type="text" placeholder="Coupon"></p>
+                            <p><input type="submit" value="Apply"></p>
+                        </form>
+                    </div>
+                </div> -->
+            </div> 
+            
+        </div>
+    </div>
+</div>
+<!-- end cart -->
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="logo-carousel-inner">
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/1.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/2.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/3.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/4.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/5.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="{% static 'customer/js/addcart.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cmain.js' %}"></script>
+<script src="{% static 'cart/js/jquery.countdown.js' %}"></script>
+<script src="{% static 'cart/js/jquery.isotope-3.0.6.min.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="{% static 'cart/js/cartmain.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+     {% for message in messages%}
+     swal('{{message}}');
+     {% endfor %}
+ </script>
+
+
+</html>
+
+
