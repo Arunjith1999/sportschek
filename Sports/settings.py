@@ -153,7 +153,7 @@ LOGOUT_REDIRECT_URL = "my_url"
 
 
 
-razor_pay_key_id=env('razor_pay_api_key_id')
+razor_pay_api_key_id=env('razor_pay_api_key_id')
 
 
 key_secret=env('key_secret')

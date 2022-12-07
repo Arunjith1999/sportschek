@@ -908,7 +908,7 @@ def order_cancel_user(request,id):
 #            cart = Cart.objects.create(product_id=product_id)
 #            cart.save()
 #            return HttpResponse('')        
-       
+from Sports.settings import razor_pay_api_key_id,key_secret    
 def razorpay_pay(request,amount):
     if "user_id" in request.session:
             print('hi')
@@ -925,7 +925,7 @@ def razorpay_pay(request,amount):
                 amount = int(amount)- int(coupon_available.discount_price)
             else:
                 amount = amount             
-
+            
             import razorpay
             client = razorpay.Client(auth=("rzp_test_xCvV0RihrwVFik", "CJcWxRCWF0yDuCla7DzzG5HY"))
             DATA = {
