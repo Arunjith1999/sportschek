@@ -33,7 +33,7 @@ def admin_login(request):
             messages.error(request, 'Please enter Email and password !')
             return redirect(admin_login)
 
-        elif email != 'admin123@gmail.com':
+        elif email != 'admin@sports.com':
             messages.error(request, 'Only admin can Login!!!')
             return redirect(admin_login)
 
