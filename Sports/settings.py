@@ -141,11 +141,12 @@ TWILIO_PHONE_NUMBER='+13143507005'
 AUTHENTICATION_BACKENDS = ('login.backends.CustomUserBackend','django.contrib.auth.backends.ModelBackend',)
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static'),
-]
-
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static'),
+# ]
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 LOGOUT_REDIRECT_URL = "my_url" 
 
