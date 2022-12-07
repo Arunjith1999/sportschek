@@ -927,7 +927,7 @@ def razorpay_pay(request,amount):
                 amount = amount             
             
             import razorpay
-            client = razorpay.Client(auth=("rzp_test_xCvV0RihrwVFik", "CJcWxRCWF0yDuCla7DzzG5HY"))
+            client = razorpay.Client(auth=(razor_pay_api_key_id, key_secret))
             DATA = {
                     "amount": ((amount)*100),
                     "currency": "INR",
