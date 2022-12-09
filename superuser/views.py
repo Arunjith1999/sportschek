@@ -137,7 +137,7 @@ def admin_home(request):
                 }
         
         
-        return render(request, 'admin/admin_home.html', context)
+        return render(request, 'Admin/admin_home.html', context)
     return redirect(admin_login)
 
 
@@ -471,7 +471,7 @@ def all_report(request):
         revenue=0
         for i in order:
             revenue=i.amount+revenue
-        return render(request,'admin/sales_report.html',{'order':page,'revenue':revenue,'page_number':p})
+        return render(request,'Admin/sales_report.html',{'order':page,'revenue':revenue,'page_number':p})
     else:
         return redirect(admin_login)    
 
@@ -495,7 +495,7 @@ def sales_report_custom(request):
 
         for i in order_today:
             revenue = i.amount+revenue
-        return render(request,'admin/sales_report_custom.html',{'order_today':page,'revenue':revenue,'startdate':startdate,'enddate':enddate,'page_number':p})
+        return render(request,'Admin/sales_report_custom.html',{'order_today':page,'revenue':revenue,'startdate':startdate,'enddate':enddate,'page_number':p})
     else:
         return redirect(admin_login)            
 
@@ -525,7 +525,7 @@ def sales_report_daily(request):
         for i in order_today:
             revenue=i.amount+revenue
             
-        return render(request, 'admin/sales_report_daily.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
+        return render(request, 'Admin/sales_report_daily.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
     else:
         return redirect(admin_login)  
 
@@ -563,7 +563,7 @@ def sales_report_weekly(request):
         for i in order_today:
             revenue=i.amount+revenue
             
-        return render(request, 'admin/sales_report_weekly.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
+        return render(request, 'Admin/sales_report_weekly.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
     else:
         return redirect(admin_login)  
 
@@ -596,7 +596,7 @@ def sales_report_yearly(request):
         for i in order_today:
             revenue=i.amount+revenue
             
-        return render(request, 'admin/sales_report_yearly.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
+        return render(request, 'Admin/sales_report_yearly.html', {'order_today':page, 'revenue':revenue,'page_number':p} )    
     else:
         return redirect(admin_login)  
 
@@ -620,7 +620,7 @@ def edit_prduct_offer(request, id):
     products = Product.objects.all()
     product = Product.objects.get(id=id) 
     print( id)
-    return render(request, 'admin/edit_prduct_offer.html', {'product':product, 'products':products})    
+    return render(request, 'Admin/edit_prduct_offer.html', {'product':product, 'products':products})    
 
 
 #=========================================
@@ -631,7 +631,7 @@ def coupons(request):
     if 'admin_id' in request.session:
         coupon = Coupen.objects.all()
         print(coupon)
-        return render(request, "admin/coupons.html", {'coupon':coupon})
+        return render(request, "Admin/coupons.html", {'coupon':coupon})
     else:
         return redirect(admin_login)
 
@@ -669,7 +669,7 @@ def add_coupon(request):
             print("The generated random string : " + str(res))
             
             Coupen.objects.create(coupon_code=code, minimum_amount=minimum, discount_price=discount)
-        return render(request, "admin/add_coupon.html",{'code':str(res)} )
+        return render(request, "Admin/add_coupon.html",{'code':str(res)} )
     else:
         return redirect(admin_login)    
 
@@ -678,7 +678,7 @@ def add_coupon(request):
 def offers(request):
     if'admin_id' in request.session:
         products=Product.objects.exclude(offer = 0)
-        return render(request,'admin/offers.html',{'products':products})
+        return render(request,'Admin/offers.html',{'products':products})
     return redirect(admin_login)    
 
 
@@ -720,7 +720,7 @@ def add_new_product_offer(request):
                 messages.success(request,'Offer added sucessfully', extra_tags='productadderror')
                 return redirect(offers)
     
-    return render(request, 'admin/add_product_offer.html', { 'products':products})    
+    return render(request, 'Admin/add_product_offer.html', { 'products':products})    
     
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)         
         
@@ -754,7 +754,7 @@ def edit_product_offer(request, id):
         messages.success(request,"offer updated successfully")
         return redirect(offers)
         
-    return render(request, 'admin/edit_product_offer.html', { 'products':products,'cat':cat})    
+    return render(request, 'Admin/edit_product_offer.html', { 'products':products,'cat':cat})    
 
 def edit_category_offer(request, id):
     cat = Category.objects.all()
@@ -769,7 +769,7 @@ def edit_category_offer(request, id):
         return redirect(offers)   
 
     print( id)
-    return render(request, 'admin/edit_category_offer.html', {'product':product, 'cat':cat})    
+    return render(request, 'Admin/edit_category_offer.html', {'product':product, 'cat':cat})    
 
 
 
@@ -779,7 +779,7 @@ def category_offers(request):
     cat = Category.objects.exclude(offer = 0)
     
     print( id)
-    return render(request, 'admin/category_offers.html', { 'products':cat})    
+    return render(request, 'Admin/category_offers.html', { 'products':cat})    
 
       
 
@@ -807,7 +807,7 @@ def add_new_category_offer(request):
     
     
     
-    return render(request, 'admin/add_new_category_offer.html', { 'cat':cat})    
+    return render(request, 'Admin/add_new_category_offer.html', { 'cat':cat})    
 
 
 def export_csv_yearly(request):

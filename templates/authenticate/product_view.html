@@ -663,10 +663,10 @@
          </header>
          <div class="single_product p-0">
             <div class="container-fluid" style=" background-color: #fff; padding: 11px;">
-                <div class="row">
+                <div class="row" style="margin-left:100px">
                    
                     {% for p in products %}
-                    <div class="col-lg-6 order-lg-1 order-2">
+                    <div class="col-lg-5 order-lg-1 order-2" >
                       <ul class="image_list">
                         <div id="img-container">
                             <div id ="lens"></div> 
@@ -686,7 +686,7 @@
                             <img id="slideRight" class="arrow" src="{% static 'customer/images/right arrow.png' %}">
                         </div>
                     </div>
-                    <div class="col-lg-6 order-3">
+                    <div class="col-lg-5 order-3">
                         <div class="product_description">
                             <nav>
                                 <ol class="breadcrumb">
@@ -703,7 +703,7 @@
                             <div> <span class="product_info"><span><br> <span class="product_info">Warranty: 6 months warranty<span><br> <span class="product_info">7 Days easy return policy<span><br> <span class="product_info">7 Days easy return policy<span><br> <span class="product_info">In Stock: 25 units sold this week<span> </div>
                             <div>
                              <div class="options">
-                                <button class="option1" onclick="cart('{{product.id}}'); swal('item added successfully')" style="    width: 160px;
+                                <button class="option1" onclick="cart('{{p.id}}'); swal('item added successfully')" style="    width: 160px;
                                 border-radius: 40px;
                                 height: 36px; background-color:black; color:white ;" >Add To Cart</button>
                                    {% comment %} <button  class="option2" onclick>

@@ -2,8 +2,6 @@ import email
 from itertools import product
 import random
 from .forms import CustomerProfileForm
-# from tkinter import *
-# from tkinter import messagebox
 from unicodedata import name
 from superuser.models import Category
 from superuser.models import Product
@@ -94,18 +92,27 @@ def register(request):
 def home(request):
     if 'user_id' in request.session: 
         products=Product.objects.all()
+        user_id='user_id' in request.session
         customer_obj=User.objects.get(email=request.session['user_id'])
         customer=customer_obj
         log=True
         cate=Category.objects.all()   
-        return render (request,'authenticate/home.html',{'products':products,'cate':cate,'customer':customer,'log':log})    
+        return render (request,'authenticate/home.html',{'products':products,'cate':cate,'customer':customer,'log':log,'user_id':user_id})    
     else:
         cate=Category.objects.all()  
+        user_id='user_id' in request.session
         products=Product.objects.all()
         log=False
-        return render(request,'authenticate/home.html',{'products':products,'cate':cate,"log":log})
+        return render(request,'authenticate/home.html',{'products':products,'cate':cate,"log":log,'user_id':user_id})
 
-
+def search(request):
+    if 'user_id' in request.session:
+        q=request.GET['q']
+        products=Product.objects.filter(name__icontains=q).order_by('id')
+        return render(request,'authenticate/search.html',{'products':products})
+    else:
+        return redirect(userlogin)    
+        
 # def forget(request):
 #     if request.method == 'POST':
 #         email=request.POST['email']
@@ -473,7 +480,7 @@ def add_address(request):
 
             if len(phone_number)!=10:
                 print('hi2')
-                messages(request, 'credentials INvalid')
+                messages.error(request, 'Invalid Credentials')
 
             elif len(Zipcode)!=6:
                 print('hi3')
@@ -908,7 +915,7 @@ def order_cancel_user(request,id):
 #            cart = Cart.objects.create(product_id=product_id)
 #            cart.save()
 #            return HttpResponse('')        
-from Sports.settings import razor_pay_api_key_id,key_secret    
+       
 def razorpay_pay(request,amount):
     if "user_id" in request.session:
             print('hi')
@@ -925,9 +932,9 @@ def razorpay_pay(request,amount):
                 amount = int(amount)- int(coupon_available.discount_price)
             else:
                 amount = amount             
-            
+
             import razorpay
-            client = razorpay.Client(auth=(razor_pay_api_key_id, key_secret))
+            client = razorpay.Client(auth=("rzp_test_xCvV0RihrwVFik", "CJcWxRCWF0yDuCla7DzzG5HY"))
             DATA = {
                     "amount": ((amount)*100),
                     "currency": "INR",

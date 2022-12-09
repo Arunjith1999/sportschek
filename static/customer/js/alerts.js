@@ -1,5 +1,5 @@
 (function($) {
-  showSwal = function(type) {
+  showSwal = function(type,id) {
     'use strict';
     if (type === 'basic') {
       swal({
@@ -205,6 +205,39 @@
         } 
         // window.location = "redirectURL";
     });
+  } else if (type === 'delete-product-cart') {
+    swal({
+      title: 'Are you sure?',
+      text: "You really want to delete the product",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3f51b5',
+      cancelButtonColor: '#ff4081',
+      confirmButtonText: 'Great ',
+      buttons: {
+        cancel: {
+          text: "Cancel",
+          value: null,
+          visible: true,
+          className: "btn btn-danger",
+          closeModal: true,
+        },
+        confirm: {
+          text: "OK",
+          value: true,
+          visible: true,
+          className: "btn btn-primary",
+          closeModal: true,
+        }
+      }
+
+    }).then((data) => {
+      if(data === true){
+        //  const id = document.getElementById('prod_id').value
+        window.location = "/delete_product_cart/" + id ;
+      } 
+      // window.location = "redirectURL";
+  });
    
     
     } else if (type === 'delete-category') {
@@ -241,6 +274,40 @@
         } 
         // window.location = "redirectURL";
     });
+  } else if (type === 'delete-cart') {
+      
+    swal({
+      title: 'Are you sure?',
+      text: "You really want to delete the Cart",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3f51b5',
+      cancelButtonColor: '#ff4081',
+      confirmButtonText: 'Great ',
+      buttons: {
+        cancel: {
+          text: "Cancel",
+          value: null,
+          visible: true,
+          className: "btn btn-danger",
+          closeModal: true,
+        },
+        confirm: {
+          text: "OK",
+          value: true,
+          visible: true,
+          className: "btn btn-primary",
+          closeModal: true,
+        }
+      }
+      
+    }).then((data) => {
+      if(data === true){
+        // const id = document.getElementById('cart_id').value
+        window.location = "/delete_cart/" ;
+      } 
+      // window.location = "redirectURL";
+  });
     
     } else if (type === 'delete-categoryOffer') {
       swal({

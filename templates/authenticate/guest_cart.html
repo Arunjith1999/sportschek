@@ -82,9 +82,9 @@
                                     
                                     <td class="product-price"><span id="{{item.product.id}}">{{value.price}}</span> Rs</td>
                                     <td class="product-quantity text-center">
-                                        <button class="btn btn-light decrement-button-{{item.id}} " style="width: 2.5em; border-radius: 1em;" onclick="decrement_quantity('{{item.quantity}}', '{{item.id}}')">-</button>
-                                                    <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{item.quantity}}" id="{{item.id}}">
-                                  <button class="btn btn-light increment-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  data-productQuantity="{{item.product.total_quantity}}" onclick="increment_quantity('{{item.quantity}}', '{{item.id}}')">+</button>
+                                        <button class="btn btn-light decrement-button-{{item.id}} " style="width: 2.5em; border-radius: 1em;" onclick="decrement_quantity('{{value.qty}}', '{{key}}')">-</button>
+                                                    <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{value.qty}}" id="{{item.id}}">
+                                  <button class="btn btn-light increment-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  data-productQuantity="{{item.product.total_quantity}}" onclick="increment_quantity('{{value.qty}}', '{{key}}')">+</button>
                                         
                                         {% comment %} <button class="btn btn-light decrement-button-{{item.id}}" style="width: 2.5em; border-radius: 1em;"  onclick="minus_quantity('{{value.qty}}', '{{key}}')">-</button>
                                                         <input type="text" style="width: 2.5em; border: none;  " class="quantity-input-{{item.id}} text-center" value="{{value.qty}}" id="{{item.id}}">

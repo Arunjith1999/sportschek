@@ -71,9 +71,10 @@
                                     <!-- <input type="number" onclick="update_quantity('{{item.quantity}}')" value="{{item.quantity}}" class="form-control text-center" id="productQty"> -->
                                 </td>
                                 
-                               <input type="hidden"id="total-{{item.id}}">
+                               <input type="hidden" id="total-{{item.id}}" >
+                               <td>
 
-                                <td><a href="/delete_product_cart/{{item.id}}"><button class="btn btn-danger">Remove</button></a></td>
+                               <button  onclick="showSwal('delete-product-cart',{{item.id}})" class="btn btn-danger">Remove</button></td>
                                 
                             </tr>
                             
@@ -205,19 +206,21 @@
                         <div class="text-center" >
                             <h6>Deliver to :</h6>
                             <h5>{{address.name}}, {{address.house_name}}, {{address.street_name}}, {{address.landmark}}, {{address.city}}, {{address.pin_code}}</h5>
-                            <a href="/choose_address_select" ><button  class="btn-success" >change address</button></a>
+                            <a href="/choose_address_select" ><button  class="btn btn-success" >change address</button></a>
+                            <div class="cart-buttons">
+                                <a href="/choose_payment_method/{{address.id}}" ><button class="btn btn-success" >Proceed to payment</button></a>
+                                <input type="hidden" >
+                                <button  onclick="showSwal('delete-cart')" class="btn btn-danger" >Delete Cart</button>
+                            </div>
                         </div>
                         {% else %}
                             <h6>Choose an address</h6>
-                            <a href="/choose_address_select" ><button  class="btn-success" >Choose address</button></a>
+                            <a href="/choose_address_select" ><button  class="btn btn-success" >Add Address For Payment</button></a>
+                            <button  onclick="showSwal('delete-cart')" class="btn btn-danger" >Delete Cart</button>
                         {% endif %}
     
     
-                        <div class="cart-buttons">
-                            <a href="/choose_payment_method/{{address.id}}" ><button class="btn btn-success" >Proceed to payment</button></a>
-                            <input type="hidden">
-                            <button id="delete-cart" onclick="showswal('delete-cart')" class="btn btn-danger" >Delete Cart</button>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -301,7 +304,9 @@
 <script src="{% static 'cart/js/cartmain.js' %}"></script>
 <script src="{% static 'cart/js/cartmain.js' %}"></script>
 <script src="{% static 'cart/js/cartmain.js' %}"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static 'customer/js/alerts.js' %}"></script>
 <script>
      {% for message in messages%}
      swal('{{message}}');

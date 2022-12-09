@@ -59,11 +59,18 @@
                             <ul class="dropdown-menu">
                                <li><a href="/userprofile/">Home</a></li> 
                                <li><a href="/order_user">Orders</a></li> 
-                               <li><a href="/ProfileView">Change Password</a></li> 
+                               {% comment %} <li><a href="/ProfileView">Change Password</a></li>  {% endcomment %}
+                              {% if user_id %} 
                                <li><a href="/userlogout">Logout</a></li>
-                            </ul>    
+                              </ul>    
+
+                            {% else %}
+                            <li><a href="/userlogout">Login</a></li>
+                           </ul>    
+                           {% endif %}
+
                         <li class="nav-item">
-                           <a class="nav-link" href="contact.html">Contact us</a>
+                           <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="/cartview">
@@ -121,11 +128,14 @@
                               </svg>
                            </a>
                         </li>
-                        <form class="form-inline">
-                           <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                           <i class="fa fa-search" aria-hidden="true"></i>
-                           </button>
-                        </form>
+                        <form class="form-inline" action="/search">
+                           <div class="input group">
+                              <input name="q" type="text" class="form-control" placeholder="search"/>
+                              {% comment %} <div class="input-group-append"> {% endcomment %}
+                           <button class="btn  btn-dark" type="submit" id="button-addon2" style="margin-bottom:18px">Search</button>
+                     
+                     </div>
+                  </form>
                      </ul>
                   </div>
                </nav>
